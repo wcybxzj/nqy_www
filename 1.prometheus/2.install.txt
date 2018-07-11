@@ -1,0 +1,20 @@
+源码:
+wget https://github.com/prometheus/prometheus/releases/download/v2.3.1/prometheus-2.3.1.linux-amd64.tar.gz
+docker
+docker pull prom/prometheus
+
+docker run -itd -p 9090:9090 --name my_prometheus  prom/prometheus
+
+实验1:
+https://192.168.1.123:9090/graph
+PromQL:
+prometheus_target_interval_length_seconds
+
+metrics:
+go_goroutines
+
+
+prometheus_target_interval_length_seconds 这个度量指标的含义是实际抓取目标时的间隔秒数。
+prometheus_target_interval_length_seconds{quantile="0.99"} 来查询 0.99 分位线的采样值也就是小于这个采样值的数量低于总数的 99%。
+count(prometheus_target_interval_length_seconds) 可以查询到该度量指标包含的时序个数。关于查询表达式的更语法后续实验会讲到。
+

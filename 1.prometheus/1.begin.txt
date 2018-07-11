@@ -1,0 +1,68 @@
+Prometheus 核心概念
+=======================================================================================================
+1.数据模型
+Prometheus 从根本上存储的所有数据都是时间序列数据（Time Serie Data，简称时序数据）。
+时序数据是具有时间戳的数据流，该数据流属于某个度量指标（Metric）和该度量指标下的多个标签（Label）。
+除了提供存储功能，Prometheus 还可以利用查询表达式来执行非灵活和复杂的查询。
+
+1.1.度量指标和标签
+每个时间序列（Time Serie，简称时序）由度量指标和一组标签键值对唯一确定。
+度量指标名称描述了被监控系统的某个测量特征（比如 http_requests_total 表示 http 请求总数）。
+度量指标名称由 ASCII 字母、数字、下划线和冒号组成，须匹配正则表达式 [a-zA-Z_:][a-zA-Z0-9_:]*。
+
+标签开启了 Prometheus 的多维数据模型。对于同一个度量指标，不同标签值组合会形成特定维度的时序。Prometheus 的查询语言可以通过度量指标和标签对时序数据进行过滤和聚合。改变任何度量指标上的任何标签值，都会形成新的时序。标签名称可以包含 ASCII 字母、数字和下划线，须匹配正则表达式 [a-zA-Z_][a-zA-Z0-9_]*，带有 _ 下划线的标签名称保留为内部使用。标签值可以包含任意 Unicode 字符，包括中文。
+
+1.2.采样值（Sample）
+时序数据其实就是一系列采样值。每个采样值包括：
+一个 64 位的浮点数值
+一个精确到毫秒的时间戳
+
+1.3.注解（Notation）
+一个注解由一个度量指标和一组标签键值对构成。形式如下：
+[metric name]{[label name]=[label value], ...}
+例如，度量指标为 api_http_requests_total，标签为 method="POST"、handler="/messages" 的注解表示如下：
+api_http_requests_total{method="POST", handler="/messages"}
+------------------------------------------------------------------------------------------------------------
+
+2.度量指标类型
+Prometheus 里的度量指标有以下几种类型。
+计数器（Counter）:
+计数器是一种累型的度量指标，它是一个只能递增的数值。计数器主要用于统计类似于服务请求数、任务完成数和错误出现次数这样的数据。
+
+计量器（Gauge）:
+计量器表示一个既可以增加, 又可以减少的度量指标值。计量器主要用于测量类似于温度、内存使用量这样的瞬时数据。
+
+直方图（Histogram）:
+直方图对观察结果（通常是请求持续时间或者响应大小这样的数据）进行采样，并在可配置的桶中对其进行统计。
+
+按桶计数，相当于 <basename>_bucket{le="<upper inclusive bound>"}
+采样值总和，相当于 <basename>_sum
+采样值总数相当于 <basename>_count ，也等同于把所有采样值放到一个桶里来计数 <basename>_bucket{le="+Inf"}
+
+汇总（Summary）:
+类似于直方图，汇总也对观察结果进行采样。除了可以统采样值总和和总数，它还能够按分位统计。有以下几种方式来产生汇总（假设度量指标为 \<basename>）：
+
+按分位数，也就是采样值小于该分位数个数占总数的比例小于 φ，相当于 <basename>{quantile="<φ>"}
+采样值总和，相当于 <basename>_sum
+采样值总数相当于 <basename>_count
+
+------------------------------------------------------------------------------------------------------------
+3.任务（Job）和实例（Instance）
+在 Prometheus 里，可以从中抓取采样值的端点称为实例，为了性能扩展而复制出来的多个这样的实例形成了一个任务。
+
+例如下面的 api-server 任务有四个相同的实例：
+job: api-server
+instance 1: 1.2.3.4:5670
+instance 2: 1.2.3.4:5671
+instance 3: 5.6.7.8:5670
+instance 4: 5.6.7.8:5671
+Prometheus 抓取完采样值后，会自动给采样值添加下面的标签和值：
+
+job:抓取所属任务。
+instance: 抓取来源实例
+另外每次抓取时，Prometheus 还会自动在以下时序里插入采样值：
+
+up{job="[job-name]", instance="instance-id"}：采样值为 1 表示实例健康，否则为不健康
+scrape_duration_seconds{job="[job-name]", instance="[instance-id]"}：采样值为本次抓取消耗时间
+scrape_samples_post_metric_relabeling{job="<job-name>", instance="<instance-id>"}：采样值为重打标签后的采样值个数
+scrape_samples_scraped{job="<job-name>", instance="<instance-id>"}：采样为本次抓取到的采样值个数
