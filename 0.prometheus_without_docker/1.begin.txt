@@ -1,0 +1,23 @@
+1.下载
+wget https://github.com/prometheus/prometheus/releases/download/v2.3.1/prometheus-2.3.1.linux-amd64.tar.gz
+wget https://github.com/prometheus/node_exporter/releases/download/v0.16.0/node_exporter-0.16.0.linux-amd64.tar.gz
+wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana-5.2.1.linux-amd64.tar.gz
+
+2.分别启动3个服务
+./prometheus
+./node_exporter
+./bin/grafana-server web
+
+3.实验
+http://192.168.1.123:9100/metrics
+http://192.168.1.123:9090/graph
+http://192.168.1.123:3000/graph
+
+promhttp_metric_handler_requests_total
+promhttp_metric_handler_requests_total{code="200"}
+count(promhttp_metric_handler_requests_total)
+rate(promhttp_metric_handler_requests_total{code="200"}[1m])
+
+
+irate(node_cpu_seconds_total[1m])
+sum without(cpu)(irate(node_cpu_seconds_total[1m]))
