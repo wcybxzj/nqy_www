@@ -1,0 +1,12 @@
+//1.启动grafana
+docker run -d -p 3000:3000 grafana/grafana
+
+//2.grafana  add datasource
+类型:my_prometheus
+名称:prometheus
+URL:http://192.168.1.123:9090
+
+
+
+wget https://github.com/prometheus/node_exporter/releases/download/v0.14.0/node_exporter-0.14.0.linux-amd64.tar.gz
+wget https://github.com/prometheus/mysqld_exporter/releases/download/v0.10.0/mysqld_exporter-0.10.0.linux-amd64.tar.gz
