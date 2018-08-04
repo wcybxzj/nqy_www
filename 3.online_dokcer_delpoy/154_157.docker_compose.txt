@@ -1,0 +1,6 @@
+在154分支添加159里的文件到这里
+
+
+
+ git checkout  remotes/origin/nqy2c2-159 nqybak.conf
+ git checkout  remotes/origin/nqy2c2-159 nqyweb.conf

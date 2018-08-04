@@ -1,0 +1,4 @@
+157内存持续增加,内存泄露
+php报错:
+Allowed memory size of X bytes exhausted (tried to allocate Y bytes)
+已经分配内存X,尝试分配y时报错
