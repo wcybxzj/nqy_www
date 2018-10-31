@@ -1,0 +1,6 @@
+curl -H "Content-Type: application/json" -X POST  --data '{"JSON体"}' http://127.0.0.1:40480/alert
+
+curl -H "Content-Type: application/json" -X POST --data '{ "auth":"C8HB4*Ad$Eaj7ZT%S2mBbWyy%qd2G49A", "To":["william@nqyong.com"], "subject":"test", "bodyHtml":"test" }' http://127.0.0.1:40480/alert
+curl -H "Content-Type: application/json" -X POST --data '{ "auth":"C8HB4*Ad$Eaj7ZT%S2mBbWyy%qd2G49A", "To":["william@nqyong.com"], "subject":"test", "bodyHtml":"test" }' http://127.0.0.1:40480/alert
+
+curl -H "Content-Type: application/json" -X POST  --data '{ "auth":"C8HB4*Ad$Eaj7ZT%S2mBbWyy%qd2G49A", "To":["william@nqyong.com"], "subject":"test", "bodyHtml":"test" }' http://192.168.1.177/nqy_www/11.json/2.receive.php
