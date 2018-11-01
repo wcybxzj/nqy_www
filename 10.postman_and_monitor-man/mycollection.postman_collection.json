@@ -1,0 +1,262 @@
+{
+	"info": {
+		"name": "mycollection",
+		"_postman_id": "d77bea74-6728-77c8-7983-c8d8905c37da",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "test1-simple:http://postman-echo.com/get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "860edc6d-4e7a-429b-bd73-ccfd891cc138",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://postman-echo.com/get",
+					"protocol": "http",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "test2-complex:http://postman-echo.com/get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7dfc603c-b69e-4df2-a679-cc5a107f568d",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"1.Status code is 200\"] = responseCode.code === 200",
+							"",
+							"pm.test(\"2.Content-Type is present\", function () {",
+							"    pm.response.to.have.header(\"Content-Type\");",
+							"});",
+							"",
+							"var contentTypeHeaderExists = responseHeaders.hasOwnProperty(\"Content-Type\");",
+							" ",
+							"tests[\"3.Has Content-Type\"] = contentTypeHeaderExists;",
+							" ",
+							"if (contentTypeHeaderExists) {",
+							"    tests[\"4.Content-Type is application/json\"] = ",
+							"      responseHeaders[\"Content-Type\"].has(\"application/json\");",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://postman-echo.com/get",
+					"protocol": "http",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"get"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "test3-insert:{{url}}/api/jsonBlob",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a45484c0-9a6d-40a0-8d5e-def160710790",
+						"type": "text/javascript",
+						"exec": [
+							"var blogLink = postman.getResponseHeader(\"Location\");",
+							"postman.setEnvironmentVariable(\"blogLink\", blogLink);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\": \"My first blog post :)\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/api/jsonBlob",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"jsonBlob"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "test4:{{blogLink}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "15a5e70d-15f9-4769-81d2-523222785b6d",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Has correct text\"] = responseBody.has(\"first blog post :)\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{blogLink}}",
+					"host": [
+						"{{blogLink}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "test5-update:{{blogLink}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "71dc35c6-705c-47be-908e-3bf5ffc58102",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Has correct updated text\"] = ",
+							"  responseBody.has(\"My first blog post, updated :)\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"content\": \"My first blog post, updated :)\"\r\n}"
+				},
+				"url": {
+					"raw": "{{blogLink}}",
+					"host": [
+						"{{blogLink}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "test6:{{blogLink}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9ebc6795-147f-45ad-8cf9-891cd93b2036",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{blogLink}}",
+					"host": [
+						"{{blogLink}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "test7:{{blogLink}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d8c0f15b-9752-452b-9c2f-1f294aea3220",
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 404\"] = ",
+							"    responseCode.code === 404;"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{blogLink}}",
+					"host": [
+						"{{blogLink}}"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
