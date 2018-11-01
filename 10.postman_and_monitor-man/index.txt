@@ -1,0 +1,5 @@
+nqy_www/11.json:是直接用php或者nodejs报警
+
+monitor-man.txt:是monitor-man中handler
+
+mycollection.postman_collection.json:postman的collection
