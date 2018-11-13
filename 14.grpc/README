@@ -1,0 +1,15 @@
+Laravel或者ThinkPHP 日志用grpc替换掉原来的curl
+
+1.composer 安装
+composer.json添加:
+{
+  "require": {
+    "grpc/grpc": "^v1.3.0",
+    "google/protobuf": "^v3.3.0"
+  }
+}
+composer install安装扩展
+
+2.将1.php_client_demo中 ApiBeatlog和GPBMetadata加入自己的项目
+
+3.按照1.php_client_demo/client.php 是调用的php demo

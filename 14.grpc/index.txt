@@ -6,10 +6,3 @@ protoc安装:
 https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protoc-3.6.1-linux-x86_64.zip
 cp bin/protoc /bin
 cp -rf include/* /usr/local/include
-
-php client demo:
-
-php client demo 集成到laravel:
-
-5.protobuf3入门(php版)
-https://www.jianshu.com/p/ace5d1e83266

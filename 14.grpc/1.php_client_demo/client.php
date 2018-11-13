@@ -14,26 +14,34 @@ include_once dirname(__FILE__).'/Apibeatlog/LogRequestData.php';
 include_once dirname(__FILE__).'/Apibeatlog/LogResponseData.php';
 include_once dirname(__FILE__).'/GPBMetadata/Apibeat.php';
 
-function greet($i)
+function LogInfo($i)
 {
+    //1.创建client
     $client = new Apibeatlog\ApiBeatClient('localhost:1234', [
         'credentials' => Grpc\ChannelCredentials::createInsecure(),
     ]);
+
+    //2.创建request
     $request = new Apibeatlog\LogRequestData();
     $request->setSource("1111111111");
     $request->setMessage("22222");
     $request->setData(json_encode(array("i"=>$i)));
     $request->setService("apigateway");
     $request->setHost("127.0.0.1");
+
+    //3.发起请求
     list($reply, $status) = $client->LogInfo($request)->wait();
-    $message = $reply->getMessage();
-    return $message;
+
+    //4.获取相应(可省略)
+    //$message = $reply->getMessage();
+    //return $message;
 }
 
+//模拟多次使用日志
 try {
-    for ($i=0;$i<100;$i++){
+    for ($i=0;$i<10;$i++){
         echo "current i".$i."\n";
-        echo greet($i)."\n";
+        echo LogInfo($i)."\n";
         sleep(1);
     }
 } catch (Exception $e) {
