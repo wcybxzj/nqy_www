@@ -12,4 +12,6 @@ composer install安装扩展
 
 2.将1.php_client_demo中 ApiBeatlog和GPBMetadata加入自己的项目
 
-3.按照1.php_client_demo/client.php 是调用的php demo
+3.新的日志域名不变端口变成15181,也就是beat:15181
+
+4.按照1.php_client_demo/client.php 是调用的php demo
