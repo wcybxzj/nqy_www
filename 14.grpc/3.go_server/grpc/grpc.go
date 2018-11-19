@@ -9,6 +9,7 @@ import (
 	"encoding/json"
 	"strconv"
 	"fmt"
+	"time"
 )
 
 type ApiBeatRpcServer struct{}
@@ -34,6 +35,7 @@ func (s *ApiBeatRpcServer) LogInfo(ctx context.Context, in *apibeatlog.LogReques
 		data.Data = f.(map[string]interface{})
 	}
 	fmt.Println(in)
+	time.Sleep(time.Second*5) //模拟要写很长时间
 	//go kafka.SendLog(config.Config.Topic, config.Config.Key, data)
 	return &apibeatlog.LogResponseData {
 		Code: strconv.Itoa(models.ERROR_OK),

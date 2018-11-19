@@ -1,8 +1,7 @@
 package main
 
 import (
-		"time"
-		"nqy_www/14.grpc/4.go_client/apilog"
+				"nqy_www/14.grpc/4.go_client/apilog"
 	"nqy_www/14.grpc/4.go_client/grpc"
 	"fmt"
 )
@@ -13,8 +12,8 @@ func main() {
 		m := map[string]int{
 			"i":    i,
 		}
-		apilog.LogData("1111111","22222222", m)
-		time.Sleep(time.Duration(time.Second))
+		apilog.LogData("go-client","22222222", m)
+		//time.Sleep(time.Duration(time.Second))
 		fmt.Println(i)
 	}
 }

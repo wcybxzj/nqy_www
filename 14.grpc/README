@@ -1,17 +1,26 @@
-Laravel或者ThinkPHP 日志用grpc替换掉原来的curl
+PHP项目日志使用GRPC替换CURL方法:
 
-1.composer 安装
-composer.json添加:
+1.将1.php_client_demo中ApiBeatlog和GPBMetadata加入自己的项目下grpc文件夹,例如fengkong/grpc
+
+2.composer 安装
+composer.json添加下面两个片段:
+
 {
   "require": {
     "grpc/grpc": "^v1.3.0",
     "google/protobuf": "^v3.3.0"
   }
 }
-composer install安装扩展
 
-2.将1.php_client_demo中 ApiBeatlog和GPBMetadata加入自己的项目
+"psr-4": {
+    "": ["grpc/"]
+}
 
-3.新的日志域名不变端口变成15181,也就是beat:15181
+composer install
 
-4.按照1.php_client_demo/client.php 是调用的php demo
+
+3.grpc的日志uri是 beat:15181
+
+4.按照1.php_client_demo/client.php是调用的php的demo,项目中需要做成单例否则每次写日志都要创建一个对象
+
+5.fengkong系统已经使用grpc来发送日志,https://git-dp.nqyong.com/ZujiDev/zuji_fengkong/commits/logToGrpc

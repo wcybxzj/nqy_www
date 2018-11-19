@@ -5,8 +5,6 @@
  * Date: 18-11-12
  * Time: 下午2:57
  */
-
-
 require dirname(__FILE__).'/vendor/autoload.php';
 
 include_once dirname(__FILE__).'/Apibeatlog/ApiBeatClient.php';
@@ -29,23 +27,36 @@ function LogInfo($i)
     $request->setService("apigateway");
     $request->setHost("127.0.0.1");
 
+
     //3.发起请求
     list($reply, $status) = $client->LogInfo($request)->wait();
 
-    //4.获取相应(可省略)
-    //$message = $reply->getMessage();
-    //return $message;
-}
-
-//模拟多次使用日志
-try {
-    for ($i=0;$i<10;$i++){
-        echo "current i".$i."\n";
-        echo LogInfo($i)."\n";
-        sleep(1);
+    //4.获取相应
+    if ($status->code == 0) {
+        $code = $reply->getCode();
+        $msg = $reply->getMsg();
+        //TODO
+    } else {
+        $code = -1;
+        $msg = 'grpc request failed';
     }
-} catch (Exception $e) {
-    echo 'Caught exception: ',  $e->getMessage(), "\n";
+    echo "code:".$code."<br>";
+    echo "msg:".$msg."<br>";
+    //set_time_limit(0);
 }
 
+try {
+    echo LogInfo(1)."<br>";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "<br>";
+}
 
+echo "永远能看到下面的业务1";
+
+try {
+    echo LogInfo(2)."<br>";
+} catch (Exception $e) {
+    echo 'Caught exception: ',  $e->getMessage(), "<br>";
+}
+
+echo "永远能看到下面的业务2";

@@ -1,8 +1,10 @@
-php protobuf扩展:
+php使用grpc需要的安装上的支持:
 
-php grpc扩展:
+1.php protobuf扩展:
 
-protoc安装:
+2.php grpc扩展:
+
+3.protoc安装:
 https://github.com/protocolbuffers/protobuf/releases/download/v3.6.1/protoc-3.6.1-linux-x86_64.zip
 cp bin/protoc /bin
 cp -rf include/* /usr/local/include
