@@ -1,0 +1,39 @@
+{
+	"info": {
+		"name": "SFMail",
+		"_postman_id": "cf02b50f-d683-b6d5-c3b5-ba89f4985672",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "mail",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"mailno\":\"251054680408\", \"mobile\":\"13821464257\"}\n"
+				},
+				"url": {
+					"raw": "https://api.nqyong.com/api/sfmail",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nqyong",
+						"com"
+					],
+					"path": [
+						"api",
+						"sfmail"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

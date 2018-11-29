@@ -2,9 +2,9 @@ monitor-man设置的handler:
 
 (async function() {
     var options = { 
-      uri: 'http://172.18.124.156:40480/alert',
+      uri: 'http://172.18.124.160:40480/alert',
       method: 'POST',
-      json: {"evalMatches":{ },"message":"{\"auth\":\"C8HB4*Ad$Eaj7ZT%S2mBbWyy%qd2G49A\",\"subject\":\"sf-alert\",\"bodyHtml\":\"html\", \"to\":[\"william@nqyong.com\"]}","ruleId":123,"ruleName":"sf","ruleUrl":"www.baidu.com","state":"fail","title":"sf-windows 服务不可用"}
+      json: {"evalMatches":{ },"message":"{\"auth\":\"C8HB4*Ad$Eaj7ZT%S2mBbWyy%qd2G49A\",\"subject\":\"顺丰物流服务报警\",\"bodyHtml\":\"html\", \"to\":[\"william@nqyong.com\"]}","ruleId":123,"ruleName":"sf","ruleUrl":"www.baidu.com","state":"fail","title":"顺丰物流服务不可用"}
     };
     
     request(options, function (error, response, body) {
