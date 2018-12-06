@@ -1,0 +1,160 @@
+{
+	"info": {
+		"name": "SFMail",
+		"_postman_id": "cf02b50f-d683-b6d5-c3b5-ba89f4985672",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "24e83e72-3aee-4f45-8f83-0aef0cbe9fe1",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"ok\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"data\");",
+							"    var response_text = JSON.parse(pm.response.text()); ",
+							"    tests[response_text.data.length] = true;",
+							"});",
+							"",
+							"",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"mailno\":\"251054680408\", \"mobile\":\"13821464257\"}\n"
+				},
+				"url": {
+					"raw": "https://api.nqyong.com/api/sfmail",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nqyong",
+						"com"
+					],
+					"path": [
+						"api",
+						"sfmail"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "本地php模拟sfmail成功的情况",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4bd5a30f-f2eb-4d84-9d8f-614c60084b1e",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"ok\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"data\");",
+							"    var response_text = JSON.parse(pm.response.text()); ",
+							"    tests[\"data is fine\"] =(response_text.data.length>0) ;",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"mailno\":\"251054680408\", \"mobile\":\"13821464257\"}\n"
+				},
+				"url": {
+					"raw": "http://192.168.1.177/go_www/src/nqy_www/10.postman_and_monitor-man/sfmail_ok.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"177"
+					],
+					"path": [
+						"go_www",
+						"src",
+						"nqy_www",
+						"10.postman_and_monitor-man",
+						"sfmail_ok.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "本地php模拟sfmail失败的情况",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9930fa8e-b47e-417d-9fdc-35fae56d0c65",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"ok\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"data\");",
+							"    var response_text = JSON.parse(pm.response.text()); ",
+							"    tests[\"data is fine\"] =(response_text.data.length>0) ;",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"mailno\":\"251054680408\", \"mobile\":\"13821464257\"}\n"
+				},
+				"url": {
+					"raw": "http://192.168.1.177/go_www/src/nqy_www/10.postman_and_monitor-man/sfmail_fail.php",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"177"
+					],
+					"path": [
+						"go_www",
+						"src",
+						"nqy_www",
+						"10.postman_and_monitor-man",
+						"sfmail_fail.php"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

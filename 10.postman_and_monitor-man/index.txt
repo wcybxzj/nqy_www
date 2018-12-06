@@ -7,4 +7,8 @@ monitor-man.txt:是monitor-man中handler
 mycollection.postman_collection.json:postman的collection
 
 顺丰物流借口的postman collection
-SFMail.postman_collection_20181129.json
+SFMail.postman_collection.json
+
+模拟物流借口
+sfmail_fail.php
+sfmail_ok.php
