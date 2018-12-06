@@ -1,0 +1,56 @@
+{
+	"info": {
+		"name": "SFMail_online",
+		"_postman_id": "cf02b50f-d683-b6d5-c3b5-ba89f4985672",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "mail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "94843854-83ae-4324-aacd-b10da47213ab",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"ok\", function () {",
+							"    pm.expect(pm.response.text()).to.include(\"data\");",
+							"    var response_text = JSON.parse(pm.response.text()); ",
+							"    tests[\"data is fine\"] =(response_text.data.length>0) ;",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"mailno\":\"251054680408\", \"mobile\":\"13821464257\"}\n"
+				},
+				"url": {
+					"raw": "https://api.nqyong.com/api/sfmail",
+					"protocol": "https",
+					"host": [
+						"api",
+						"nqyong",
+						"com"
+					],
+					"path": [
+						"api",
+						"sfmail"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

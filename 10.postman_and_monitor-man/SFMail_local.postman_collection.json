@@ -1,61 +1,11 @@
 {
 	"info": {
-		"name": "SFMail",
-		"_postman_id": "cf02b50f-d683-b6d5-c3b5-ba89f4985672",
+		"name": "SFMail_local",
+		"_postman_id": "02a08076-bf2b-b5db-f47d-5eae849dabe9",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
-		{
-			"name": "mail",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "24e83e72-3aee-4f45-8f83-0aef0cbe9fe1",
-						"type": "text/javascript",
-						"exec": [
-							"pm.test(\"ok\", function () {",
-							"    pm.expect(pm.response.text()).to.include(\"data\");",
-							"    var response_text = JSON.parse(pm.response.text()); ",
-							"    tests[response_text.data.length] = true;",
-							"});",
-							"",
-							"",
-							"",
-							""
-						]
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\"mailno\":\"251054680408\", \"mobile\":\"13821464257\"}\n"
-				},
-				"url": {
-					"raw": "https://api.nqyong.com/api/sfmail",
-					"protocol": "https",
-					"host": [
-						"api",
-						"nqyong",
-						"com"
-					],
-					"path": [
-						"api",
-						"sfmail"
-					]
-				}
-			},
-			"response": []
-		},
 		{
 			"name": "本地php模拟sfmail成功的情况",
 			"event": [

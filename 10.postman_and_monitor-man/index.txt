@@ -6,8 +6,12 @@ monitor-man.txt:是monitor-man中handler
 自学postman的collection
 mycollection.postman_collection.json:postman的collection
 
-顺丰物流借口的postman collection
-SFMail.postman_collection.json
+调用本地php测试postman
+SFMail_local.postman_collection.json
+
+调用线上golang测试postman
+SFMail_online.postman_collection.json
+
 
 模拟物流借口
 sfmail_fail.php
