@@ -1,0 +1,97 @@
+珠峰教育-高级架构系列公开课
+https://www.bilibili.com/video/av31769829?t=170
+
+============================================================================
+1.例子:
+例如:www.baidu.com 里面如果url有www.123.com就存在跨域问题
+============================================================================
+2.定义:
+只有3元组:协议+域名+端口 三者完全一样才算是同源
+
+协议不同:
+http://baidu.com
+https://baidu.com  
+
+主域名不同:
+http://abc.com
+https://baidu.com  
+
+子域名不同:
+http://123.abc.com
+https://baidu.com  
+
+端口不同:
+http://123.abc.com:123
+https://baidu.com:456
+============================================================================
+3.为什么浏览器不支持跨域
+cookie:不能让不同域名的网站访问到你域名的cookie危险
+LocalStorage:同上
+DOM:只有在同源的情况下内嵌iframe中的元素才能操作
+ajax:只有在同源的情况下ajax才能允许请求
+============================================================================
+4.为什么需要实现跨域:
+情况1:前端1台机器 后端1台机器
+情况2:就是两个域名的网页想互相通信
+============================================================================
+5.跨域的手段-9种:
+jsonp:
+cors:纯后端提供的功能
+postMessage:两个页面通信
+document.domain:
+window.name:
+location.hash:
+webpack:http-proxy:
+nginx反向代理:
+websocket:
+============================================================================
+6.nginx准备两个域名(ubuntu)
+
+server {
+      listen 80; 
+      server_name www.aaa.com;
+      location / { 
+            root /root/www/go_www/src/nqy_www/16.cross_domain/aaa;
+            index  index.html index.htm;
+        }   
+      error_page   500 502 503 504  /50x.html;
+      location = /50x.html {
+            root   html;
+        }   
+}
+
+server {
+      listen 80; 
+      server_name www.bbb.com;
+      location / { 
+            root /root/www/go_www/src/nqy_www/16.cross_domain/bbb;
+            index  index.html index.htm;
+        }   
+      error_page   500 502 503 504  /50x.html;
+      location = /50x.html {
+            root   html;
+        }   
+}   
+============================================================================
+7.方案1-jsonp:
+jsonp实现基础:
+不受同源策略影响的html标签:
+www.aaa.com/index.html里
+<link src="www.bbb.com">
+<img src="www.bbb.com">
+<script src="www.bbb.com">
+
+windows:
+访问http://www.aaa.com/1.jsonp.html
+
+缺点:
+只能使用GET请求,所以请求长度受限制
+不安全如果引用的的jsonp.js 文件有恶意代码很危险
+============================================================================
+8.方案2-cors:
+npm install express
+node 2.cors_server.js
+
+ubuntu:
+访问 http://127.0.0.1:3000/2.cors.html
+============================================================================
