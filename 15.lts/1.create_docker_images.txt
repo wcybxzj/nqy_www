@@ -1,0 +1,20 @@
+cd www
+git clone https://github.com/ltsopensource/light-task-scheduler.git
+sh build.sh
+cd dist
+unzip lts-1.7.2-SNAPSHOT-bin.zip
+cd lts-1.7.2-SNAPSHOT-bin
+mkdir tmp
+
+cd bin
+vim jobtracker.sh
+vim lts-admin.sh
+nohup去掉最后的&前台运行
+
+mkdir -p /root/www/docker_images/lts1.7.2/lts-admin 
+mkdir -p /root/www/docker_images/lts1.7.2/lts-jobtracker
+cd /www/docker_images/lts1.7.2/lts-admin 
+cp -rf  /root/www/light-task-scheduler/dist/lts-1.7.2-SNAPSHOT-bin .
+
+cd /www/docker_images/lts1.7.2/lts-jobtracker
+cp -rf  /root/www/light-task-scheduler/dist/lts-1.7.2-SNAPSHOT-bin .
