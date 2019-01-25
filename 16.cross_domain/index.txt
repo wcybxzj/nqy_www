@@ -46,32 +46,41 @@ nginx反向代理:
 websocket:
 ============================================================================
 6.nginx准备两个域名(ubuntu)
+  server {                                                                                                                                                                  
+        listen       80; 
+        server_name www.aaa.com;
+        root /root/www/go_www/src/nqy_www/16.cross_domain/aaa;
+        location / { 
+            index  index.php;
+            if (!-e $request_filename) {
+                rewrite . /index.php last;
+            }   
+        }   
+        location ~ \.php$ {
+            fastcgi_pass   127.0.0.1:9010;
+            fastcgi_index  index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+    }
 
-server {
-      listen 80; 
-      server_name www.aaa.com;
-      location / { 
-            root /root/www/go_www/src/nqy_www/16.cross_domain/aaa;
-            index  index.html index.htm;
-        }   
-      error_page   500 502 503 504  /50x.html;
-      location = /50x.html {
-            root   html;
-        }   
-}
-
-server {
-      listen 80; 
-      server_name www.bbb.com;
-      location / { 
-            root /root/www/go_www/src/nqy_www/16.cross_domain/bbb;
-            index  index.html index.htm;
-        }   
-      error_page   500 502 503 504  /50x.html;
-      location = /50x.html {
-            root   html;
-        }   
-}   
+  server {
+        listen       80;
+        server_name www.bbb.com;
+        root /root/www/go_www/src/nqy_www/16.cross_domain/bbb;
+        location / {
+            index  index.php;
+            if (!-e $request_filename) {
+                rewrite . /index.php last;
+            }
+        }
+        location ~ \.php$ {
+            fastcgi_pass   127.0.0.1:9010;
+            fastcgi_index  index.php;
+            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+    }
 ============================================================================
 7.方案1-jsonp:
 jsonp实现基础:
@@ -89,9 +98,7 @@ windows:
 不安全如果引用的的jsonp.js 文件有恶意代码很危险
 ============================================================================
 8.方案2-cors:
-npm install express
-node 2.cors_server.js
-
-ubuntu:
-访问 http://127.0.0.1:3000/2.cors.html
+可以让www.baidu.com的html中的ajax post请求www.bbb.com的API
+www.bbb.com的服务端做修改即可
+实例看vue_www中deploy项目
 ============================================================================
