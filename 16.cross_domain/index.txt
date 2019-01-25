@@ -1,6 +1,6 @@
 珠峰教育-高级架构系列公开课
 https://www.bilibili.com/video/av31769829?t=170
-
+https://www.cnblogs.com/loveis715/p/4592246.html
 ============================================================================
 1.例子:
 例如:www.baidu.com 里面如果url有www.123.com就存在跨域问题
