@@ -1,0 +1,37 @@
+{
+    "IsDebug":true,
+    "SaveLog":false,
+    "IsMaster":true,
+    "LogURI":"192.168.1.111:15181",
+    "LogService":"deploy",
+    "LogHost":"host",
+    "Authcode":"#9aGqr8%u*pTwr8E",
+    "Database":"root:root@tcp(127.0.0.1:3306)/deploy?charset=utf8",
+    "MasterURI":"http://127.0.0.1:31695/api",
+    "groups":[
+        {
+          "permission":1,
+          "db_user":"root",
+          "db_pass":"root",
+          "redis_pass":"123"
+        },
+        {
+          "permission":2,
+          "db_user":"root2",
+          "db_pass":"pass2",
+          "redis_pass":"222"
+        },
+        {
+          "permission":3,
+          "db_user":"root3",
+          "db_pass":"pass3",
+          "redis_pass":"333"
+        },
+        {
+          "permission":4,
+          "db_user":"root4",
+          "db_pass":"pass4",
+          "redis_pass":"4444"
+        }
+    ]
+}

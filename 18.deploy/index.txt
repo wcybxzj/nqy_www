@@ -1,0 +1,38 @@
+idea同时调式deploy-server和deploy-client的方法
+
+==============================================================
+server:
+run kind:directory
+Directory:/root/www/go_www/src/zuji/deploy
+output Directory:/root/www/go_www/src/zuji/deploy/bin
+working Directory:/root/www/go_www/src/zuji/deploy/bin
+
+client:
+run kind:directory
+Directory:/root/www/go_www/src/zuji/deploy
+output Directory:/root/www/go_www/src/zuji/deploy/bin_client
+working Directory:/root/www/go_www/src/zuji/deploy/bin_client
+
+==============================================================
+
+tree /root/www/go_www/src/zuji/deploy/bin_client
+/root/www/go_www/src/zuji/deploy/bin_client
+├── client
+└── data
+    ├── config.json
+    └── keys
+        ├── deploy_private_key.pem
+        ├── deploy_public_key.pem
+        ├── master_private_key.pem
+        └── master_public_key.pem
+
+tree /root/www/go_www/src/zuji/deploy/bin
+/root/www/go_www/src/zuji/deploy/bin
+├── data
+│   ├── config.json
+│   └── keys
+│       ├── deploy_private_key.pem
+│       ├── deploy_public_key.pem
+│       ├── master_private_key.pem
+│       └── master_public_key.pem
+└── server
