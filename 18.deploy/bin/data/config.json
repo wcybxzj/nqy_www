@@ -5,7 +5,7 @@
     "LogURI":"192.168.1.111:15181",
     "LogService":"deploy",
     "LogHost":"host",
-    "Authcode":"#9aGqr8%u*pTwr8E",
+    "Authcode":"g4&wKP$ndUy4JDWt4%Z4k4&W*@XP&9FP",
     "Database":"root:root@tcp(127.0.0.1:3306)/deploy?charset=utf8",
     "MasterURI":"http://127.0.0.1:31695/api",
     "groups":[
