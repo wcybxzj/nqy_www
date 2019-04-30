@@ -1,0 +1,31 @@
+version: '2.2'
+
+services:
+
+ jumpserver:
+    restart: always
+    image: jumpserver/jms_all:latest
+
+    environment:
+        SECRET_KEY: 3ONZm7dBA72dxhvYFLNQx3yankrWChMMOVZMvzmOnWVYdlwlS3
+        BOOTSTRAP_TOKEN: XLgDeD1pURihYOrS
+        DB_HOST: 192.168.1.177
+        DB_PORT: 3306
+        DB_USER: jumpserver
+        DB_PASSWORD: weakPassword
+        DB_NAME: jumpserver
+        REDIS_HOST: 192.168.1.177
+        REDIS_PORT: 6379
+        REDIS_PASSWORD: nqyong_redis_123
+
+    volumes:
+        - /opt/jumpserver/media:/opt/jumpserver/data/media
+
+    network_mode: host
+
+    #ports:
+    #  - 18880:80
+    #  - 12222:2222
+
+    cpus: 1
+
