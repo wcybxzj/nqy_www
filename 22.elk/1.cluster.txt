@@ -1,0 +1,3 @@
+3.插入数据【这样也就是说创建了一个文档为users】
+curl -H "Content-Type: application/json"   -d '{ "name":"smartom", "age":19 }' http://127.0.0.1:9200/smartom_index/users/101
+
